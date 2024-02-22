@@ -1,11 +1,12 @@
 import "./app.css";
-import { NotFound } from "./view/NotFound";
+// import { NotFound } from "./view/NotFound";
+// import MainLayout from "./view/MainLayout";
 import { Login } from "./view/Login";
 import React, { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
-import type { RouteObject } from "react-router";
 import AuthGuard from "./guard/AuthGuard";
 import { useAuth } from "./context/AuthContext";
+import Home from "./view/Home";
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -14,7 +15,6 @@ const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
     </Suspense>
   );
 const Register = Loadable(lazy(() => import("./view/Register")));
-const MainLayout = Loadable(lazy(() => import("./view/MainLayout")));
 const PasswordReset = Loadable(lazy(() => import("./view/PasswordReset")));
 const LoadingScreen = Loadable(lazy(() => import("./view/LoadingScreen")));
 
@@ -42,7 +42,7 @@ const App = () => {
       path: "*",
       element: (
         <AuthGuard>
-          <MainLayout />
+          <Home />
         </AuthGuard>
       ),
     },

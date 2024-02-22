@@ -1,12 +1,8 @@
 import type { FC, ReactNode } from "react";
 import React from "react";
-import { useState } from "react";
-import { Navigate, useLocation, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Login } from "../view/Login";
 import { useAuth } from "../context/AuthContext";
-import Register from "../view/Register";
-import PasswordReset from "../view/PasswordReset";
 import LoadingScreen from "../view/LoadingScreen";
 
 interface AuthGuardProps {
@@ -16,14 +12,11 @@ interface AuthGuardProps {
 const AuthGuard: FC<AuthGuardProps> = (props) => {
   const { children } = props;
   const { isAuthenticated, getUserSession, getAsyncLoadingState } = useAuth();
-  const location = useLocation(),
-    isLoading = getAsyncLoadingState();
+  const isLoading = getAsyncLoadingState();
+  console.log("AuthGuard");
   console.log(`Loading: ${isLoading}`);
   if (isLoading) return <LoadingScreen />;
   if (!isAuthenticated) {
-    /* const path = location.pathname;
-    if (path.includes("/register")) return <Register />;
-    if (path.includes("/passwordreset")) return <PasswordReset />; */
     return <Navigate to="/authentication/login" />;
   }
   console.log(`Auth: ${isAuthenticated}`);

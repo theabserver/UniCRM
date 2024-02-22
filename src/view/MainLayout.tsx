@@ -1,14 +1,18 @@
-import React from "react";
-import { Navbar } from "../component/navbar";
+/* import React from "react";
+import { Navbar } from "../component/Navbar";
 
-const MainLayout = ({ ChildComponent }: { ChildComponent: React.FC }) => {
+type MainLayoutProps = {
+  ChildComponent: React.ComponentType<any>;
+};
+
+export default function MainLayout({ ChildComponent }: MainLayoutProps) {
+  console.log("MainLayout");
   return (
     <>
       <Navbar />
       Main Layout
-      {ChildComponent}
+      <ChildComponent />
     </>
   );
-};
-
-export default MainLayout;
+}
+ */
