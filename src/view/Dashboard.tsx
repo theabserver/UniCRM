@@ -8,6 +8,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 const currentTime = new Date();
 
 const Dashboard = () => {
+  // TODO: re-render calendar when drawer collapses
   const [appointments, setAppointments] = useState([
     {
       id: 1,

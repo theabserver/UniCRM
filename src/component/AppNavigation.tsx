@@ -13,7 +13,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../context/AuthContext";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import SchoolIcon from "@mui/icons-material/School";
@@ -127,7 +127,8 @@ export const AppNavigation = () => {
     }
   };
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = (event) => {
+    event.stopPropagation();
     setOpen(true);
   };
 
@@ -146,9 +147,9 @@ export const AppNavigation = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{ zIndex: 1300 }}>
         <Toolbar sx={{ display: "flex" }}>
           <IconButton
             color="inherit"
@@ -212,6 +213,10 @@ export const AppNavigation = () => {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color:
+                      currentComponent === text.toLowerCase()
+                        ? "primary.main"
+                        : "inherit",
                   }}
                 >
                   {index == 0
@@ -245,6 +250,10 @@ export const AppNavigation = () => {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color:
+                      currentComponent === text.toLowerCase()
+                        ? "primary.main"
+                        : "inherit",
                   }}
                 >
                   {index == 0
@@ -257,7 +266,8 @@ export const AppNavigation = () => {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, pr: 7, pl: 5, pt: 7 }}>
+      <Box sx={{ flexGrow: 1, pr: 7, pl: 11, pt: 7 }}>
+        {/* Content */}
         <DrawerHeader />
         {renderComponent()}
       </Box>

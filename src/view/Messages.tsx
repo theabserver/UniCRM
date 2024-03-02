@@ -1,28 +1,60 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Typography, Container } from "@mui/material";
+import DataTable from "../component/Datatable";
 
-const getUserList = (users, role) => (
-  <ul>
-    {users.map((user, index) => {
-      if (user.Role == role)
-        return (
-          <li key={index}>
-            {user.FName} {user.LName}
-          </li>
-        );
-      else return;
-    })}
-  </ul>
-);
+type User = {
+  FName: string;
+  LName: string;
+  Email: string;
+  Password: string;
+  Role: string;
+};
+
+const getUsersForRole = (users, role): [User] => {
+  const filteredUsers = users.filter((user) => user.Role == role);
+  console.log(`${role} Users: `, filteredUsers);
+  return users.filter((user) => user.Role == role);
+};
+const getHeaders = (): string[] => {
+  // return Object.keys(users[0]);
+  return ["First Name", "Last Name", "Email", "Role", "Actions"];
+};
+const getDatakeys = (): string[] => {
+  return ["FName", "LName", "Email", "Role", "actions"];
+};
 
 const Messages = () => {
   // const { messages, sendMessage } = useChat(room);
   const [newMessage, setNewMessage] = useState("");
   const [users, setUsers] = useState([]);
 
+  const getUserList = (users, role) => {
+    const usersForRole = getUsersForRole(users, role);
+    return (
+      <>
+        <ul>
+          {usersForRole.map((user: User, index) => {
+            return (
+              <li key={index}>
+                {user.FName} {user.LName}
+              </li>
+            );
+          })}
+        </ul>
+
+        <DataTable
+          model={role}
+          items={usersForRole}
+          dataKeys={getDatakeys()}
+          headers={getHeaders()}
+          // onDelete={this.openDialog}
+        />
+      </>
+    );
+  };
+
   const getRoleCount = () => {
     const roleCounts = {};
-    debugger;
     if (users.length) {
       // Calculate counts for each role
       users.forEach((user) => {
@@ -40,7 +72,6 @@ const Messages = () => {
   );
 
   useEffect(() => {
-    debugger;
     setUsers([
       {
         FName: "John",
@@ -197,6 +228,7 @@ const Messages = () => {
     sendMessage(newMessage);
     setNewMessage("");
   }; */
+  console.log(users);
   return (
     <>
       {Object.keys(cachedRoleCount).length &&

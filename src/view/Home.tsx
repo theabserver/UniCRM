@@ -10,14 +10,7 @@ const Home = () => {
   return (
     <>
       <AppNavigation />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          minHeight: `calc(100vh - 136px)`,
-        }}
-      ></Box>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
