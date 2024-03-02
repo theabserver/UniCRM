@@ -32,16 +32,6 @@ const Messages = () => {
     const usersForRole = getUsersForRole(users, role);
     return (
       <>
-        <ul>
-          {usersForRole.map((user: User, index) => {
-            return (
-              <li key={index}>
-                {user.FName} {user.LName}
-              </li>
-            );
-          })}
-        </ul>
-
         <DataTable
           model={role}
           items={usersForRole}
